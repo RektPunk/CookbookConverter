@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "upstage-cookbook"
+version = "0.0.1"
+description = ""
+authors = ["RektPunk <rektpunk@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+reflex = "^0.5.10"
+black = "^24.8.0"
+isort = "^5.13.2"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+pre-commit = "^3.8.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
