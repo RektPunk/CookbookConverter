@@ -2,7 +2,9 @@ from typing import Callable, Optional
 
 import reflex as rx
 
-from cookbook.templates.sidebar import sidebar
+from cookbook import styles
+from cookbook.components.navbar import navbar
+from cookbook.components.sidebar import sidebar
 
 DEFAULT_META = [
     {
@@ -13,30 +15,55 @@ DEFAULT_META = [
 
 
 def template(
-    route: str,
-    title: Optional[str] = None,
-    description: Optional[str] = None,
+    route: str | None = None,
+    title: str | None = None,
 ) -> Callable[[Callable[[], rx.Component]], rx.Component]:
     def decorator(page_content: Callable[[], rx.Component]) -> rx.Component:
-        _all_meta = [*DEFAULT_META]
+        all_meta = [*DEFAULT_META]
+
+        def templated_page():
+            return rx.flex(
+                navbar(),
+                sidebar(),
+                rx.flex(
+                    rx.vstack(
+                        page_content(),
+                        width="100%",
+                        **styles.template_content_style,
+                    ),
+                    width="100%",
+                    **styles.template_page_style,
+                    max_width=[
+                        "100%",
+                        "100%",
+                        styles.max_width,
+                    ],
+                ),
+                flex_direction=[
+                    "column",
+                    "column",
+                    "column",
+                    "column",
+                    "row",
+                ],
+                width="100%",
+                margin="auto",
+                position="relative",
+            )
 
         @rx.page(
             route=route,
-            title=title or route[1:],
-            description=description or "Description",
-            meta=_all_meta,
+            title=title,
+            meta=all_meta,
         )
-        def templated_page() -> rx.Component:
-            return rx.container(
-                rx.color_mode.button(position="top-right"),
-                rx.hstack(
-                    sidebar(),
-                    page_content(),
-                    direction="column",
-                ),
-                width="100%",
+        def theme_wrap():
+            return rx.theme(
+                templated_page(),
+                has_background=True,
+                radius="small",
+                accent_color="purple",
             )
 
-        return templated_page
+        return theme_wrap
 
     return decorator
