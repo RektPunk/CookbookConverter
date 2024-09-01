@@ -4,7 +4,11 @@ from typing import Dict, List, Optional
 import reflex as rx
 import requests
 
-from cookbook.utils import convert_local_image_paths, format_code_lint, is_url
+from cookbook.components.utils import (
+    convert_local_image_paths,
+    format_code_lint,
+    is_url,
+)
 
 
 def _read_jupyter(path: str) -> List[Dict]:
@@ -64,8 +68,9 @@ def _style_cell(cell: dict, image_base_url: Optional[str]) -> rx.Component:
     return rx.vstack(*components)
 
 
-def jupyter(path: str, image_base_url: str) -> rx.Component:
+def jupyter(path: str, image_base_url: Optional[str] = None) -> rx.Component:
     _cells = _read_jupyter(path=path)
     return rx.vstack(
-        *[_style_cell(cell=cell, image_base_url=image_base_url) for cell in _cells]
+        *[_style_cell(cell=cell, image_base_url=image_base_url) for cell in _cells],
+        width="100%",
     )

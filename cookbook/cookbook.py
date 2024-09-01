@@ -1,11 +1,6 @@
 import reflex as rx
 
-from cookbook.jupyter import jupyter
-
-BASE_URL: str = "https://github.com/RektPunk/cookbook/blob/main/cookbooks/upstage"
-BASE_RAW_URL: str = (
-    "https://raw.githubusercontent.com/RektPunk/cookbook/main/cookbooks/upstage"
-)
+from cookbook.pages import *
 
 style = {
     rx.button: {
@@ -16,20 +11,12 @@ style = {
 }
 
 
-def index() -> rx.Component:
-    return rx.container(
-        rx.color_mode.button(position="top-right"),
-        rx.vstack(
-            jupyter(
-                path=f"{BASE_RAW_URL}/Solar-Full-Stack%20LLM-101/01_hello_solar.ipynb",
-                image_base_url=f"{BASE_URL}/Solar-Full-Stack%20LLM-101/",
-            ),
-            spacing="5",
-            justify="center",
-            min_height="85vh",
-        ),
-    )
-
-
-app = rx.App(style=style)
-app.add_page(index)
+app = rx.App(
+    theme=rx.theme(
+        appearance="light",
+        has_background=True,
+        radius="large",
+        accent_color="purple",
+    ),
+    style=style,
+)
