@@ -1,42 +1,97 @@
-import re
-from typing import Optional
+from typing import Dict, List
 
-import black
-import isort
+import reflex as rx
+
+from cookbook.components.notebook import NotebookState
 
 
-def is_url(path) -> bool:
-    url_pattern = re.compile(
-        r"^(?:http|ftp)s?://"
-        r"(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|"
-        r"localhost|"
-        r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|"
-        r"\[?[A-F0-9]*:[A-F0-9:]+\]?)"
-        r"(?::\d+)?"
-        r"(?:/?|[/?]\S+)$",
-        re.IGNORECASE,
+def footer() -> rx.Component:
+    return rx.hstack(
+        rx.link(
+            rx.text("GitHub", size="3"),
+            href="https://github.com/RektPunk/cookbook-converter",
+            color_scheme="gray",
+            underline="none",
+        ),
+        rx.link(
+            rx.text("Issue", size="3"),
+            href="https://github.com/RektPunk/cookbook-converter/issues",
+            color_scheme="gray",
+            underline="none",
+        ),
+        rx.spacer(),
+        rx.color_mode.button(style={"opacity": "0.8", "scale": "0.95"}),
+        justify="start",
+        align="center",
+        width="100%",
+        padding="0.35em",
     )
-    return re.match(url_pattern, path) is not None
 
 
-def convert_local_image_paths(markdown_text: str, image_base_url: Optional[str]) -> str:
-    if image_base_url is None:
-        return markdown_text
+def document_link(info: List[str]) -> rx.Component:
+    return rx.link(
+        rx.hstack(
+            rx.text(info[0], size="2"),
+            width="100%",
+            padding_x="0.5rem",
+            padding_y="0.25rem",
+            align="center",
+        ),
+        href=info[1],
+        underline="none",
+        weight="medium",
+        width="100%",
+    )
 
-    local_image_pattern = re.compile(r"!\[([^\]]*)\]\(([^http][^\)]+)\)")
 
-    def _replace_local_path(match):
-        alt_text = match.group(1)
-        local_path = match.group(2).lstrip("/")
-        global_url = f"{image_base_url}{local_path}?raw=true"
-        return f"![{alt_text}]({global_url})"
+def accordian_item(
+    text: str,
+    state,
+) -> rx.Component:
+    return rx.accordion.item(
+        header=rx.hstack(rx.icon("folder", size=20), rx.text(text, size="2")),
+        content=rx.vstack(
+            rx.foreach(
+                state,
+                document_link,
+            )
+        ),
+    )
 
-    return local_image_pattern.sub(_replace_local_path, markdown_text)
+
+def accordian_items(texts: List[str], states: List[Dict[str, str]]):
+    _items = []
+    for text, state in zip(texts, states):
+        _items.append(accordian_item(text=text, state=state))
+    return rx.accordion.root(
+        *_items,
+        collapsible=True,
+        type="multiple",
+        variant="ghost",
+    )
 
 
-def format_code_lint(code: str) -> str:
-    try:
-        isorted_code = isort.code(code=code)
-        return black.format_str(isorted_code, mode=black.Mode())
-    except Exception:
-        return code
+def render_items() -> rx.Component:
+    return rx.vstack(
+        rx.link(
+            rx.hstack(
+                rx.icon("home", size=20),
+                rx.text("Home", size="3"),
+                width="100%",
+                padding_x="0.5rem",
+                padding_y="0.75rem",
+                align="center",
+            ),
+            href="/",
+            underline="none",
+            weight="medium",
+            width="100%",
+        ),
+        accordian_items(
+            texts=["ChatGPT", "Third party"],
+            states=[NotebookState.chatgpt, NotebookState.third_party],
+        ),
+        spacing="1",
+        width="100%",
+        align="left",
+    )
