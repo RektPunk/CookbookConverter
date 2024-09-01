@@ -7,8 +7,8 @@ This project provides a template to convert your Jupyter Notebook-based cookbook
 1. **Clone the repository:**
 
    ```bash
-   git clone <your-repo-url>
-   cd <your-repo-directory>
+   git clone https://github.com/RektPunk/cookbook-converter.git
+   cd cookbook-converter
    ```
 
 2. **Install the required dependencies:**
@@ -29,11 +29,9 @@ This project provides a template to convert your Jupyter Notebook-based cookbook
    reflex run
    ```
 
-
 ## Contributing
 
 Contributions are welcome! Please submit issues and pull requests through the GitHub repository.
-
 
 ## Acknowledgments
 
