@@ -1,3 +1,4 @@
+# flake8: noqa
 import reflex as rx
 
 from cookbook.pages import *
@@ -20,3 +21,4 @@ app = rx.App(
     ),
     style=style,
 )
+app.add_page()

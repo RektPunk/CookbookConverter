@@ -2,7 +2,6 @@ from typing import Callable, Optional
 
 import reflex as rx
 
-from cookbook.components.jupyter import jupyter
 from cookbook.templates.sidebar import sidebar
 
 DEFAULT_META = [
