@@ -1,9 +1,9 @@
 import reflex as rx
 
-from cookbook.components import jupyter
+from cookbook.components.jupyter import jupyter
 from cookbook.templates import template
 
-BASE_RAW_URL = "https://raw.githubusercontent.com/openai/openai-cookbook/main/examples"
+BASE_RAW_URL = "assets"  # FIXME: input basic raw path including url
 
 
 def create_route_component(route: str) -> rx.Component:

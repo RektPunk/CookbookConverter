@@ -1,15 +1,15 @@
+# %%
 from typing import Dict
 
 import reflex as rx
 
 
 class NotebookState(rx.State):
-    chatgpt: Dict[str, str] = {
-        "introduction_to_gpt4o": "/gpt4o/introduction_to_gpt4o",
+    basic_use: Dict[str, str] = {
+        "introduction": "basic_use/introduction",
     }
-    third_party: Dict[str, str] = {
-        "GPT_finetuning_with_wandb": "/third_party/GPT_finetuning_with_wandb",
-        "How_to_automate_S3_storage_with_functions": "/third_party/How_to_automate_S3_storage_with_functions",
+    advanced_use: Dict[str, str] = {
+        "advanced": "advanced_use/advanced",
     }
 
     @classmethod
@@ -19,3 +19,8 @@ class NotebookState(rx.State):
     @classmethod
     def get_values(cls):
         return [getattr(cls, key) for key in cls.get_keys()]
+
+
+# %%
+NotebookState.get_keys()
+# %%

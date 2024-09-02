@@ -3,7 +3,8 @@ from typing import Callable
 import reflex as rx
 
 from cookbook import styles
-from cookbook.components import navbar, sidebar
+from cookbook.components.bar.navbar import navbar
+from cookbook.components.bar.sidebar import sidebar
 
 DEFAULT_META = [
     {
