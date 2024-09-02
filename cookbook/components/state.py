@@ -1,4 +1,3 @@
-# %%
 from typing import Dict
 
 import reflex as rx
@@ -19,8 +18,3 @@ class NotebookState(rx.State):
     @classmethod
     def get_values(cls):
         return [getattr(cls, key) for key in cls.get_keys()]
-
-
-# %%
-NotebookState.get_keys()
-# %%
