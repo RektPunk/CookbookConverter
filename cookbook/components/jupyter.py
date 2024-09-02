@@ -110,3 +110,13 @@ def jupyter(path: str, image_base_url: Optional[str] = None) -> rx.Component:
         *[_style_cell(cell=cell, image_base_url=image_base_url) for cell in _cells],
         width="100%",
     )
+
+
+class CookBookNotebook(rx.State):
+    @classmethod
+    def get_keys(cls):
+        return list(cls.__annotations__.keys())
+
+    @classmethod
+    def get_values(cls):
+        return [getattr(cls, key) for key in cls.get_keys()]

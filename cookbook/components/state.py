@@ -1,20 +1,14 @@
 from typing import Dict
 
-import reflex as rx
+from cookbook.components.jupyter import CookBookNotebook
 
 
-class NotebookState(rx.State):
+class NotebookState(CookBookNotebook):
+    """{text on link: router path}"""
+
     basic_use: Dict[str, str] = {
-        "introduction": "basic_use/introduction",
+        "introduction": "introduction",
     }
     advanced_use: Dict[str, str] = {
-        "advanced": "advanced_use/advanced",
+        "advanced": "advanced",
     }
-
-    @classmethod
-    def get_keys(cls):
-        return list(cls.__annotations__.keys())
-
-    @classmethod
-    def get_values(cls):
-        return [getattr(cls, key) for key in cls.get_keys()]
