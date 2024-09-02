@@ -1,7 +1,7 @@
 import reflex as rx
 
 from cookbook import styles
-from cookbook.components.utils import footer, render_items
+from cookbook.components.bar.utils import footer, render_items
 
 
 def navbar_main() -> rx.Component:
@@ -9,7 +9,7 @@ def navbar_main() -> rx.Component:
         rx.drawer.trigger(
             rx.icon("align-justify"),
         ),
-        rx.drawer.overlay(z_index="5"),
+        rx.drawer.overlay(z_index="3"),
         rx.drawer.portal(
             rx.drawer.content(
                 rx.vstack(
@@ -49,7 +49,7 @@ def navbar() -> rx.Component:
             padding_y="1em",
             padding_x=["1em", "1em", "2em"],
         ),
-        display=["block", "block", "block", "block", "block", "none"],
+        display=["block", "block", "block", "block", "none"],
         position="sticky",
         background_color=rx.color("gray", 1),
         top="0px",

@@ -2,7 +2,7 @@ from typing import Dict, List
 
 import reflex as rx
 
-from cookbook.components.notebook import NotebookState
+from cookbook.components.state import NotebookState
 
 
 def footer() -> rx.Component:
@@ -88,8 +88,8 @@ def render_items() -> rx.Component:
             width="100%",
         ),
         accordian_items(
-            texts=["ChatGPT", "Third party"],
-            states=[NotebookState.chatgpt, NotebookState.third_party],
+            texts=NotebookState.get_keys(),
+            states=NotebookState.get_values(),
         ),
         spacing="1",
         width="100%",

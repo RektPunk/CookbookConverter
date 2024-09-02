@@ -9,12 +9,6 @@ BASE_RAW_URL = "https://raw.githubusercontent.com/openai/openai-cookbook/main/ex
 def create_route_component(route: str) -> rx.Component:
     @template(route=route)
     def dynamic_component() -> rx.Component:
-        return rx.vstack(
-            jupyter(
-                path=f"{BASE_RAW_URL}/{route}.ipynb",
-            ),
-            spacing="3",
-            justify="center",
-        )
+        return jupyter(path=f"{BASE_RAW_URL}/{route}.ipynb")
 
     return dynamic_component

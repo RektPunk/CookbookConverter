@@ -15,9 +15,11 @@ template_content_style = {
 }
 base_stylesheets = [
     "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
+    # "style.css",
 ]
 base_style = {
     "font_family": "Inter",
+    "overflow_y": "scroll",
     rx.button: {
         "font_family": "Comic Sans MS",
         "background_color": "transparent",

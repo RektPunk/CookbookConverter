@@ -35,6 +35,9 @@ def template(
                     max_width=[
                         "100%",
                         "100%",
+                        "100%",
+                        "100%",
+                        "100%",
                         styles.max_width,
                     ],
                 ),
@@ -61,6 +64,7 @@ def template(
                 has_background=True,
                 radius="small",
                 accent_color="purple",
+                scaling="100%",
             )
 
         return theme_wrap
