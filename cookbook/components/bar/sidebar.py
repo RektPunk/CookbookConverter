@@ -1,7 +1,7 @@
 import reflex as rx
 
 from cookbook import styles
-from cookbook.components.utils import footer, render_items
+from cookbook.components.bar.utils import footer, render_items
 
 
 def sidebar() -> rx.Component:

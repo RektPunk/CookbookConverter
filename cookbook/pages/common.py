@@ -1,20 +1,26 @@
+import os
+
 import reflex as rx
 
-from cookbook.components import jupyter
+from cookbook.components.jupyter import jupyter
 from cookbook.templates import template
 
-BASE_RAW_URL = "https://raw.githubusercontent.com/openai/openai-cookbook/main/examples"
+BASE_RAW_PATH = "assets"  # FIXME: input basic raw path including url
 
 
-def create_route_component(route: str) -> rx.Component:
+def create_route_component(route: str, file_path: str) -> rx.Component:
     @template(route=route)
     def dynamic_component() -> rx.Component:
-        return rx.vstack(
-            jupyter(
-                path=f"{BASE_RAW_URL}/{route}.ipynb",
-            ),
-            spacing="3",
-            justify="center",
-        )
+        _file_path = os.path.join(BASE_RAW_PATH, file_path)
+        print(_file_path)
+        if file_path.endswith(".ipynb"):
+            return jupyter(path=_file_path)
+
+        if file_path.endswith(".md"):
+            with open(_file_path, encoding="utf-8") as file:
+                content = file.read()
+            return rx.markdown(content)
+
+        return rx.markdown("")
 
     return dynamic_component

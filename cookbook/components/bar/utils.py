@@ -2,7 +2,7 @@ from typing import Dict, List
 
 import reflex as rx
 
-from cookbook.components.notebook import NotebookState
+from cookbook.components.state import NotebookState
 
 
 def footer() -> rx.Component:
@@ -30,13 +30,7 @@ def footer() -> rx.Component:
 
 def document_link(info: List[str]) -> rx.Component:
     return rx.link(
-        rx.hstack(
-            rx.text(info[0], size="2"),
-            width="100%",
-            padding_x="0.5rem",
-            padding_y="0.25rem",
-            align="center",
-        ),
+        rx.text(info[0], size="2"),
         href=info[1],
         underline="none",
         weight="medium",
@@ -46,7 +40,7 @@ def document_link(info: List[str]) -> rx.Component:
 
 def accordian_item(
     text: str,
-    state,
+    state: Dict[str, str],
 ) -> rx.Component:
     return rx.accordion.item(
         header=rx.hstack(rx.icon("folder", size=20), rx.text(text, size="2")),
@@ -88,8 +82,8 @@ def render_items() -> rx.Component:
             width="100%",
         ),
         accordian_items(
-            texts=["ChatGPT", "Third party"],
-            states=[NotebookState.chatgpt, NotebookState.third_party],
+            texts=NotebookState.get_keys(),
+            states=NotebookState.get_values(),
         ),
         spacing="1",
         width="100%",
