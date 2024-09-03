@@ -5,6 +5,7 @@ from typing import Dict, List, Optional
 
 import black
 import isort
+import plotly.graph_objs as go
 import reflex as rx
 import requests
 
@@ -64,6 +65,11 @@ def _read_jupyter(path: str) -> List[Dict]:
     return notebook["cells"]
 
 
+def _strip_ansi_codes(text):
+    ansi_escape = re.compile(r"\x1B[@-_][0-?]*[ -/]*[@-~]|[-]")
+    return ansi_escape.sub("", text)
+
+
 def _render_output(output: Dict) -> rx.Component:
     output_type = output["output_type"]
     if output_type == "stream":
@@ -76,14 +82,19 @@ def _render_output(output: Dict) -> rx.Component:
             return rx.html("".join(data["text/html"]))
         if "image/png" in data:
             return rx.image(src=f"data:image/png;base64,{data['image/png']}")
+        if "application/vnd.plotly.v1+json" in data:
+            return rx.plotly(data=go.Figure(data.get("application/vnd.plotly.v1+json")))
     elif output_type == "error":
-        return rx.text("".join(output.get("traceback", [])), color="red")
+        cleaned_message = _strip_ansi_codes("<br>".join(output.get("traceback", [])))
+        return rx.markdown(cleaned_message, color="red")
     return rx.text("Unsupported output type")
 
 
 def _style_cell(cell: dict, image_base_url: Optional[str]) -> rx.Component:
     cell_type = cell.get("cell_type", "unknown")
     content = "".join(cell.get("source", ""))
+    if len(content) == 0:
+        return rx.spacer(spacing="0")
 
     components = []
     if cell_type == "code":
