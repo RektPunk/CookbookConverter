@@ -122,7 +122,7 @@ def _style_cell(cell: dict, image_base_url: Optional[str]) -> rx.Component:
     return rx.vstack(*components)
 
 
-def jupyter(path: str, image_base_url: Optional[str] = None) -> rx.Component:
+def read_jupyter(path: str, image_base_url: Optional[str] = None) -> rx.Component:
     _cells = _read_jupyter(path=path)
     return rx.vstack(
         *[_style_cell(cell=cell, image_base_url=image_base_url) for cell in _cells],
@@ -130,17 +130,25 @@ def jupyter(path: str, image_base_url: Optional[str] = None) -> rx.Component:
     )
 
 
+def read_markdown(path: str) -> str:
+    if _is_url(path=path):
+        response = requests.get(path)
+        content = response.text
+    else:
+        with open(path, "r", encoding="utf-8") as file:
+            content = file.read()
+    return content
+
+
 def create_route_component(route: str, file_path: str, **kwargs) -> rx.Component:
     @template(route=route, **kwargs)
     def dynamic_component() -> rx.Component:
         _file_path = os.path.join(BASE_RAW_PATH, file_path)
         if file_path.endswith(".ipynb"):
-            return jupyter(path=_file_path)
+            return read_jupyter(path=_file_path)
 
         if file_path.endswith(".md"):
-            with open(_file_path, encoding="utf-8") as file:
-                content = file.read()
-            return rx.markdown(content)
+            return rx.markdown(read_markdown(path=_file_path))
 
         return rx.markdown("")
 
