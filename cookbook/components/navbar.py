@@ -1,7 +1,5 @@
 """Navbar component for the app."""
 
-from typing import Dict, List
-
 import reflex as rx
 
 from .. import styles
