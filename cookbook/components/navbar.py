@@ -1,15 +1,17 @@
+"""Navbar component for the app."""
+
 import reflex as rx
 
-from cookbook import styles
-from cookbook.components.bar.utils import footer, render_items
+from .. import styles
+from .utils import footer, render_accordian_items
 
 
-def navbar_main() -> rx.Component:
+def navbar_button() -> rx.Component:
     return rx.drawer.root(
         rx.drawer.trigger(
             rx.icon("align-justify"),
         ),
-        rx.drawer.overlay(z_index="3"),
+        rx.drawer.overlay(z_index="5"),
         rx.drawer.portal(
             rx.drawer.content(
                 rx.vstack(
@@ -20,7 +22,7 @@ def navbar_main() -> rx.Component:
                         width="100%",
                     ),
                     rx.divider(),
-                    render_items(),
+                    render_accordian_items(),
                     rx.spacer(),
                     footer(),
                     spacing="4",
@@ -42,14 +44,19 @@ def navbar_main() -> rx.Component:
 def navbar() -> rx.Component:
     return rx.el.nav(
         rx.hstack(
+            # The logo.
+            rx.color_mode_cond(
+                rx.image(src="/reflex_black.svg", height="1em"),
+                rx.image(src="/reflex_white.svg", height="1em"),
+            ),
             rx.spacer(),
-            navbar_main(),
+            navbar_button(),
             align="center",
             width="100%",
-            padding_y="1em",
+            padding_y="1.25em",
             padding_x=["1em", "1em", "2em"],
         ),
-        display=["block", "block", "block", "block", "none"],
+        display=["block", "block", "block", "block", "block", "none"],
         position="sticky",
         background_color=rx.color("gray", 1),
         top="0px",

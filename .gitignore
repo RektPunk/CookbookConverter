@@ -1,3 +1,9 @@
+*.db
+*.py[cod]
+.cursorignore
+.venv/
+.vscode/
 .web
 __pycache__/
-.idea
+assets/external/
+venv/

@@ -1,31 +1,10 @@
+"""Navbar Sidebar utils."""
+
 from typing import Dict, List
 
 import reflex as rx
 
-from cookbook.components.state import NotebookState
-
-
-def footer() -> rx.Component:
-    return rx.hstack(
-        rx.link(
-            rx.text("GitHub", size="3"),
-            href="https://github.com/RektPunk/cookbook-converter",
-            color_scheme="gray",
-            underline="none",
-        ),
-        rx.link(
-            rx.text("Issue", size="3"),
-            href="https://github.com/RektPunk/cookbook-converter/issues",
-            color_scheme="gray",
-            underline="none",
-        ),
-        rx.spacer(),
-        rx.color_mode.button(style={"opacity": "0.8", "scale": "0.95"}),
-        justify="start",
-        align="center",
-        width="100%",
-        padding="0.35em",
-    )
+from ..backend.notebook_state import NotebookState
 
 
 def document_link(info: List[str]) -> rx.Component:
@@ -65,7 +44,7 @@ def accordian_items(texts: List[str], states: List[Dict[str, str]]):
     )
 
 
-def render_items() -> rx.Component:
+def render_accordian_items() -> rx.Component:
     return rx.vstack(
         rx.link(
             rx.hstack(
@@ -88,4 +67,33 @@ def render_items() -> rx.Component:
         spacing="1",
         width="100%",
         align="left",
+    )
+
+
+def footer() -> rx.Component:
+    return rx.hstack(
+        rx.link(
+            rx.text("GitHub", size="3"),
+            href="https://github.com/RektPunk/cookbook-converter",
+            color_scheme="gray",
+            underline="none",
+        ),
+        rx.link(
+            rx.text("Issue", size="3"),
+            href="https://github.com/RektPunk/cookbook-converter/issues",
+            color_scheme="gray",
+            underline="none",
+        ),
+        rx.link(
+            rx.text("Setting", size="3"),
+            href="/settings",
+            color_scheme="gray",
+            underline="none",
+        ),
+        rx.spacer(),
+        rx.color_mode.button(style={"opacity": "0.8", "scale": "0.95"}),
+        justify="start",
+        align="center",
+        width="100%",
+        padding="0.35em",
     )

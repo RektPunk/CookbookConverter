@@ -1,2 +1,3 @@
 # flake8: noqa
-from cookbook.pages.pages import *
+from .pages import *
+from .settings import settings

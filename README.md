@@ -1,6 +1,6 @@
 # Cookbook to Webpage Converter
 
-This project provides a template to convert your Jupyter Notebook-based cookbook (`.ipynb` files) into a user-friendly webpage. With minimal setup, you can easily deploy your cookbook online.
+This project provides a template to convert your Jupyter Notebook-based cookbook (`.ipynb` files) or markdown (`.md` files) into a user-friendly webpage. With minimal setup, you can easily deploy your cookbook online.
 
 ## Contribution
 
