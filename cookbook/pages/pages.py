@@ -1,3 +1,5 @@
+"""All pages made with .md, .ipynb"""
+
 import os
 
 from .common import create_route_component

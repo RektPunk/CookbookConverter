@@ -1,8 +1,10 @@
 # flake8: noqa
+"""Welcome to Cookbook converter!."""
+
 import reflex as rx
 
-from cookbook import styles
-from cookbook.pages import *
+from . import styles
+from .pages import *
 
 app = rx.App(
     style=styles.base_style,

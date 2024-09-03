@@ -1,7 +1,5 @@
 """Common templates used between pages in the app."""
 
-from __future__ import annotations
-
 from typing import Callable
 
 import reflex as rx
