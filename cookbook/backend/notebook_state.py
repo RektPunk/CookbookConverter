@@ -9,9 +9,6 @@ class NotebookState(rx.State):
     basic_use: Dict[str, str] = {
         "introduction": "introduction",
     }
-    advanced_use: Dict[str, str] = {
-        "advanced": "advanced",
-    }
 
     @classmethod
     def get_keys(cls):
