@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "upstage-cookbook"
+name = "cookbook"
 version = "0.0.1"
 description = ""
 authors = ["RektPunk <rektpunk@gmail.com>"]
