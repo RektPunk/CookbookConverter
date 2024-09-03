@@ -10,11 +10,6 @@ from ..views.scaling_picker import scaling_picker
 
 @template(route="/settings", title="Settings")
 def settings() -> rx.Component:
-    """The settings page.
-
-    Returns:
-        The UI for the settings page.
-    """
     return rx.vstack(
         rx.heading("Settings", size="5"),
         # Primary color picker

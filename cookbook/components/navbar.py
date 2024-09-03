@@ -42,12 +42,6 @@ def navbar_button() -> rx.Component:
 
 
 def navbar() -> rx.Component:
-    """The navbar.
-
-    Returns:
-        The navbar component.
-    """
-
     return rx.el.nav(
         rx.hstack(
             # The logo.
