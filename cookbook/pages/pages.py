@@ -1,6 +1,6 @@
 import os
 
-from cookbook.pages.common import create_route_component
+from .common import create_route_component
 
 index = create_route_component(route="/", file_path="index.md")
 
