@@ -9,7 +9,7 @@ import plotly.graph_objs as go
 import reflex as rx
 import requests
 
-from cookbook.templates import template
+from ..templates import template
 
 BASE_RAW_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "notebooks"
