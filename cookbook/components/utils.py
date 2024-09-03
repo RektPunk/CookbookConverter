@@ -1,4 +1,4 @@
-"""Navbar component for the app."""
+"""Navbar Sidebar utils."""
 
 from typing import Dict, List
 
