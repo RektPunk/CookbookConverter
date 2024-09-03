@@ -84,6 +84,12 @@ def footer() -> rx.Component:
             color_scheme="gray",
             underline="none",
         ),
+        rx.link(
+            rx.text("Setting", size="3"),
+            href="/settings",
+            color_scheme="gray",
+            underline="none",
+        ),
         rx.spacer(),
         rx.color_mode.button(style={"opacity": "0.8", "scale": "0.95"}),
         justify="start",
