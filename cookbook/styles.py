@@ -43,7 +43,9 @@ overlapping_button_style = {
 
 markdown_style = {
     "code": lambda text: rx.code(text, color_scheme="gray"),
-    "codeblock": lambda text, **props: rx.code_block(text, **props, margin_y="1em"),
+    "codeblock": lambda text, **props: rx.code_block(
+        text, **props, margin_y="1em", can_copy=True
+    ),
     "a": lambda text, **props: rx.link(
         text,
         **props,
@@ -75,4 +77,8 @@ base_stylesheets = [
 
 base_style = {
     "font_family": "Inter",
+    rx.button: {
+        "background_color": "transparent",
+        "color": rx.color_mode_cond("gray", "white"),
+    },
 }
