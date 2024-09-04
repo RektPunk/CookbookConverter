@@ -44,10 +44,12 @@ def navbar_button() -> rx.Component:
 def navbar() -> rx.Component:
     return rx.el.nav(
         rx.hstack(
-            # The logo.
-            rx.color_mode_cond(
-                rx.image(src="/reflex_black.svg", height="1em"),
-                rx.image(src="/reflex_white.svg", height="1em"),
+            rx.link(
+                rx.color_mode_cond(
+                    rx.image(src="/rektpunk_black.png", height="1.5em"),
+                    rx.image(src="/rektpunk_white.png", height="1.5em"),
+                ),
+                href="/",
             ),
             rx.spacer(),
             navbar_button(),

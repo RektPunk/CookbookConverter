@@ -8,9 +8,12 @@ from .utils import footer, render_accordian_items
 
 def sidebar_header() -> rx.Component:
     return rx.hstack(
-        rx.color_mode_cond(
-            rx.image(src="/reflex_black.svg", height="1.5em"),
-            rx.image(src="/reflex_white.svg", height="1.5em"),
+        rx.link(
+            rx.color_mode_cond(
+                rx.image(src="/rektpunk_black.png", height="2.5em"),
+                rx.image(src="/rektpunk_white.png", height="2.5em"),
+            ),
+            href="/",
         ),
         rx.spacer(),
         align="center",
