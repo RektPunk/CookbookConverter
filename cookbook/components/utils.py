@@ -46,20 +46,6 @@ def accordian_items(texts: List[str], states: List[Dict[str, str]]):
 
 def render_accordian_items() -> rx.Component:
     return rx.vstack(
-        rx.link(
-            rx.hstack(
-                rx.icon("home", size=20),
-                rx.text("Home", size="3"),
-                width="100%",
-                padding_x="0.5rem",
-                padding_y="0.75rem",
-                align="center",
-            ),
-            href="/",
-            underline="none",
-            weight="medium",
-            width="100%",
-        ),
         accordian_items(
             texts=NotebookState.get_keys(),
             states=NotebookState.get_values(),
