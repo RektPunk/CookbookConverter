@@ -52,7 +52,7 @@ def render_accordian_items() -> rx.Component:
         ),
         spacing="1",
         width="100%",
-        align="left",
+        align="start",
     )
 
 
